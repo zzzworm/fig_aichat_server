@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "elevenlabs_keys",
+  "info": {
+    "singularName": "elevenlabs-key",
+    "pluralName": "elevenlabs-keys",
+    "displayName": "ElevenLabsKey"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {}
+}

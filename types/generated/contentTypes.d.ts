@@ -447,6 +447,34 @@ export interface ApiChatConversationChatConversation
   };
 }
 
+export interface ApiElevenlabsKeyElevenlabsKey
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'elevenlabs_keys';
+  info: {
+    displayName: 'ElevenLabsKey';
+    pluralName: 'elevenlabs-keys';
+    singularName: 'elevenlabs-key';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::elevenlabs-key.elevenlabs-key'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -681,46 +709,6 @@ export interface PluginReviewWorkflowsWorkflowStage
       'manyToOne',
       'plugin::review-workflows.workflow'
     >;
-  };
-}
-
-export interface PluginStrapiSupergptConvo extends Struct.CollectionTypeSchema {
-  collectionName: 'convos';
-  info: {
-    displayName: 'Convo';
-    pluralName: 'convos';
-    singularName: 'convo';
-  };
-  options: {
-    comment: '';
-    draftAndPublish: false;
-    timestamps: true;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    content: Schema.Attribute.Text;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'plugin::strapi-supergpt.convo'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    userId: Schema.Attribute.Integer;
   };
 }
 
@@ -998,12 +986,12 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::ai-character.ai-character': ApiAiCharacterAiCharacter;
       'api::chat-conversation.chat-conversation': ApiChatConversationChatConversation;
+      'api::elevenlabs-key.elevenlabs-key': ApiElevenlabsKeyElevenlabsKey;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
-      'plugin::strapi-supergpt.convo': PluginStrapiSupergptConvo;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

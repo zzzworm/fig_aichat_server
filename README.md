@@ -34,6 +34,9 @@ Two core data tables are established:
   - Tracks conversation metadata and context
   - Enables conversation continuity and analysis
 
+- **elevenlabs-key**
+  - api for get elevenlabs api key 
+
 ### Architecture Benefits
 
 - **Rapid Development**: Strapi's auto-generated APIs accelerate backend development
@@ -54,7 +57,7 @@ modify .env or .env.development as your need
 ### import data
 to run this project, you should import demo data
 run(with pass: fig)
-`npx strapi import export_20250814101021.tar.gz.enc`
+`npx strapi import export_20250814224350.tar.gz.enc`
 
 
 ### `develop`
