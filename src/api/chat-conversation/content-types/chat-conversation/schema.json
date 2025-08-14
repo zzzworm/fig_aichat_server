@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chat_conversations",
+  "info": {
+    "singularName": "chat-conversation",
+    "pluralName": "chat-conversations",
+    "displayName": "Chat Conversation"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "message_id": {
+      "type": "uid",
+      "required": true
+    },
+    "query": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "text"
+    },
+    "conversation_id": {
+      "type": "string"
+    },
+    "ai_character": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ai-character.ai-character"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "message_status": {
+      "type": "enumeration",
+      "default": "sent",
+      "enum": [
+        "sent",
+        "read"
+      ]
+    }
+  }
+}

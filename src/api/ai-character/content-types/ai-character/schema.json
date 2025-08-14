@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ai_characters",
+  "info": {
+    "singularName": "ai-character",
+    "pluralName": "ai-characters",
+    "displayName": "AI Character"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "introduce": {
+      "type": "text"
+    },
+    "prompt": {
+      "type": "richtext"
+    },
+    "coverUrl": {
+      "type": "string"
+    },
+    "agentId": {
+      "type": "string"
+    }
+  }
+}

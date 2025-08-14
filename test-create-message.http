@@ -1,0 +1,128 @@
+### Test create-message API
+
+POST http://localhost:1337/api/chat-conversations/create-message
+Content-Type: application/json
+
+{
+  "data": {
+    "character_id": "1",
+    "query": "Hello, please introduce yourself"
+  }
+}
+
+### Test my-list API
+
+# Basic pagination query
+GET http://localhost:1337/api/chat-conversations/my-list?page=1&pageSize=20
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Custom pagination
+GET http://localhost:1337/api/chat-conversations/my-list?page=2&pageSize=10
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Filter by time range
+GET http://localhost:1337/api/chat-conversations/my-list?filters[createdAt][$gte]=2024-01-01&filters[createdAt][$lte]=2024-12-31
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Filter by AI Character
+GET http://localhost:1337/api/chat-conversations/my-list?filters[ai_character][id][$eq]=1
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Filter by conversation ID
+GET http://localhost:1337/api/chat-conversations/my-list?filters[conversation_id][$eq]=1234567890
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Filter by message status
+GET http://localhost:1337/api/chat-conversations/my-list?filters[message_status][$eq]=sent
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Combined filter conditions
+GET http://localhost:1337/api/chat-conversations/my-list?filters[ai_character][id][$eq]=1&filters[createdAt][$gte]=2024-01-01&page=1&pageSize=15
+Authorization: Bearer YOUR_JWT_TOKEN
+
+# Search query content
+GET http://localhost:1337/api/chat-conversations/my-list?filters[query][$containsi]=hello
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Parameter Description
+# create-message:
+#   data.character_id: AI Character ID (corresponds to documentId in ai-character table)
+#   data.query: User's question or message content
+
+# my-list:
+#   page: Page number (optional, default 1)
+#   pageSize: Items per page (optional, default 20)
+
+### Expected Response
+# create-message success response:
+# {
+#   "data": [
+#     {
+#       "id": 1,
+#       "message_id": "msg_1234567890_abc123",
+#       "query": "Hello, please introduce yourself",
+#       "answer": "AI generated answer",
+#       "conversation_id": "1234567890",
+#       "ai_character": {...},
+#       "createdAt": "2024-01-01T00:00:00.000Z",
+#       "updatedAt": "2024-01-01T00:00:00.000Z"
+#     },
+#     {
+#       "id": 2,
+#       "message_id": "msg_1234567890_def456",
+#       "query": "Hello, please introduce yourself",
+#       "answer": "AI generated answer",
+#       "conversation_id": "1234567890",
+#       "ai_character": {...},
+#       "createdAt": "2024-01-01T00:00:00.000Z",
+#       "updatedAt": "2024-01-01T00:00:00.000Z"
+#     }
+#   ]
+# }
+
+# my-list success response:
+# {
+#   "data": [
+#     {
+#       "id": 1,
+#       "message_id": "msg_1234567890_abc123",
+#       "query": "User question",
+#       "answer": "AI answer",
+#       "conversation_id": "1234567890",
+#       "ai_character": {
+#         "id": 1,
+#         "name": "AI Assistant",
+#         "prompt": "You are an AI assistant",
+#         "introduce": "I am an AI assistant"
+#       },
+#       "user": {
+#         "id": 1,
+#         "username": "user123",
+#         "email": "user@example.com"
+#       },
+#       "createdAt": "2024-01-01T00:00:00.000Z",
+#       "updatedAt": "2024-01-01T00:00:00.000Z"
+#     }
+#   ],
+#   "meta": {
+#     "pagination": {
+#       "page": 1,
+#       "pageSize": 20,
+#       "pageCount": 1,
+#       "total": 1
+#     }
+#   }
+# }
+
+### Error Cases
+# create-message:
+# 1. User not authenticated: 401 Unauthorized
+# 2. Missing character_id: 400 Bad Request
+# 3. Missing query: 400 Bad Request
+# 4. AI Character does not exist: 400 Bad Request
+# 5. AI Character missing prompt: 400 Bad Request
+# 6. Server error: 500 Internal Server Error
+
+# my-list:
+# 1. User not authenticated: 401 Unauthorized
+# 2. Server error: 500 Internal Server Error
