@@ -1,6 +1,61 @@
-# 🚀 Getting started with Strapi
+# AI Chat Server
+
+## Architectural Decisions
+
+This project is built on **Strapi** for rapid backend prototyping, providing built-in user registration and authentication functionality out of the box.
+
+### AI Implementation Architecture
+
+The system incorporates **two AI implementations**:
+
+1. **Dify-based AI** (Self-deployable)
+   - AI calls are routed through the server for centralized management
+   - User-AI chat records are logged and stored on the server
+   - Provides full conversation history tracking
+   - Whe use this, please import Dify/AI RTC Demo.yml to your dify console, and modify .env file.
+
+2. **ElevenLabs Conversation AI Agent**
+   - Direct client-to-ElevenLabs communication
+   - Real-time voice conversation capabilities
+   - Bypasses server for direct AI interaction
+
+### Data Model Design
+
+Two core data tables are established:
+
+- **AI Character Table**
+  - Defines AI role characteristics and behavior
+  - Contains `prompt` field as system prompt for AI models
+  - Stores `agentId` for ElevenLabs Conversation AI Agent identification
+  - Ensures behavioral consistency by maintaining synchronized prompts between server configuration and ElevenLabs Agent
+
+- **Conversation Table**
+  - Records user-AI interaction history
+  - Tracks conversation metadata and context
+  - Enables conversation continuity and analysis
+
+### Architecture Benefits
+
+- **Rapid Development**: Strapi's auto-generated APIs accelerate backend development
+- **Scalable AI**: Dual AI implementation strategy for different use cases
+- **Data Consistency**: Centralized prompt management ensures AI behavior uniformity
+- **Flexible Integration**: Supports both server-mediated and direct AI communication patterns
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+
+## setup
+
+### prepare dependancis
+run `npm install`
+
+### config your env
+modify .env or .env.development as your need
+
+### import data
+to run this project, you should import demo data
+run(with pass: fig)
+`npx strapi import export_20250814101021.tar.gz.enc`
+
 
 ### `develop`
 
@@ -40,22 +95,3 @@ Strapi gives you many possible deployment options for your project including [St
 yarn strapi deploy
 ```
 
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
