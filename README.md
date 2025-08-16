@@ -57,7 +57,7 @@ modify .env or .env.development as your need
 ### import data
 to run this project, you should import demo data
 run(with pass: fig)
-`npx strapi import export_20250814224350.tar.gz.enc`
+`npx strapi import -f export_20250814224350.tar.gz.enc`
 
 
 ### `develop`
@@ -98,3 +98,6 @@ Strapi gives you many possible deployment options for your project including [St
 yarn strapi deploy
 ```
 
+
+## API Spec
+import AP_Spec.har to PostMan
