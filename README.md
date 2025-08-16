@@ -43,6 +43,7 @@ Two core data tables are established:
 - **Scalable AI**: Dual AI implementation strategy for different use cases
 - **Data Consistency**: Centralized prompt management ensures AI behavior uniformity
 - **Flexible Integration**: Supports both server-mediated and direct AI communication patterns
+-- need trun on `agent_response`, `user_transcript` from Elevenlabs agent's Advanced Setting to get transcript for user and agent's response.
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
